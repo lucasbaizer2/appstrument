@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "appstrument"
+		},
+		{
+			"path": "appstrument-common"
+		},
+		{
+			"path": "appstrument-server-native"
+		},
+		{
+			"path": "appstrument-client"
+		}
+	],
+	"settings": {
+		"java.configuration.updateBuildConfiguration": "automatic"
+	}
+}
