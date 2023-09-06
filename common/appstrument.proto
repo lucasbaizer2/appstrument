@@ -1,0 +1,78 @@
+syntax = 'proto3';
+
+package appstrument.protobuf;
+option java_package = "appstrument.server.protobuf";
+option java_multiple_files = true;
+
+import 'data_model.proto';
+
+message AppstrumentRequest {
+  int32 id = 1;
+
+  oneof body {
+    GetLoadedClassesRequest loaded_classes = 2;
+    GetStaticFieldsRequest static_fields = 3;
+    GetObjectFieldsRequest object_fields = 4;
+    GetArrayValuesRequest array_values = 5;
+    GetProcessStatusRequest process_status = 6;
+    ExecuteSlatRequest execute_slat = 7;
+  }
+}
+
+message GetLoadedClassesRequest {
+  enum QueryType {
+    FULL = 0;
+    PARTIAL = 1;
+  }
+
+  QueryType query_type = 1;
+}
+
+message GetStaticFieldsRequest { string class_name = 1; }
+
+message GetObjectFieldsRequest { int32 object_id = 1; }
+
+message GetArrayValuesRequest { int32 object_id = 1; }
+
+message GetProcessStatusRequest {}
+
+message ExecuteSlatRequest { string code = 1; }
+
+message AppstrumentResponse {
+  int32 id = 1;
+  oneof body {
+    GetLoadedClassesResponse loaded_classes = 2;
+    GetStaticFieldsResponse static_fields = 3;
+    GetObjectFieldsResponse object_fields = 4;
+    GetArrayValuesResponse array_values = 5;
+    GetProcessStatusResponse process_status = 6;
+    ExecuteSlatResponse execute_slat = 7;
+    LogcatStream logcat_stream = 8;
+  }
+}
+
+message GetLoadedClassesResponse { repeated LoadedClass classes = 1; }
+
+message GetStaticFieldsResponse {
+  repeated JavaField fields = 1;
+}
+
+message GetObjectFieldsResponse {
+  repeated JavaField fields = 1;
+}
+
+message GetArrayValuesResponse { int32 object_id = 1; }
+
+message GetProcessStatusResponse {
+  repeated JavaThread threads = 1;
+}
+
+message ExecuteSlatResponse {
+  string text = 1;
+  bool error = 2;
+  JavaValue result = 3;
+}
+
+message LogcatStream {
+  string text = 1;
+}

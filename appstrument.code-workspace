@@ -1,16 +1,16 @@
 {
 	"folders": [
 		{
-			"path": "appstrument"
+			"path": "libappstrument"
 		},
 		{
-			"path": "appstrument-common"
+			"path": "client"
 		},
 		{
-			"path": "appstrument-server-native"
+			"path": "android"
 		},
 		{
-			"path": "appstrument-client"
+			"path": "common"
 		}
 	],
 	"settings": {

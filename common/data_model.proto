@@ -1,0 +1,55 @@
+syntax = 'proto3';
+
+package appstrument.protobuf;
+option java_package = "appstrument.server.protobuf";
+option java_multiple_files = true;
+
+enum LoadedClassType {
+  UNRESOLVED = 0;
+  CLASS = 1;
+  INTERFACE = 2;
+  ENUM = 3;
+  ANNOTATION = 4;
+}
+
+message LoadedClass {
+  LoadedClassType class_type = 1;
+  string class_name = 2;
+  bool is_loaded = 3;
+}
+
+message JavaThread {
+  string name = 1;
+  bool is_daemon = 2;
+  string stack_trace = 3;
+}
+
+message JavaField {
+  string name = 1;
+  string type = 2;
+  JavaValue value = 3;
+  int32 object_id = 4;
+}
+
+message JavaValueList {
+  string list_type = 1;
+  repeated JavaValue items = 2;
+}
+
+message JavaValue {
+  enum JavaValueType {
+    NOT_PRESENT = 0;
+    PRESENT = 1;
+    NULL_OBJECT = 2;
+  }
+
+  JavaValueType value_type = 1;
+  oneof value {
+    double decimal = 2;
+    sint64 integer = 3;
+    bool boolean = 4;
+    string string = 5;
+    string object_type = 6;
+    JavaValueList list = 7;
+  }
+}
