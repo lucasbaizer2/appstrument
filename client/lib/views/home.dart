@@ -1,4 +1,3 @@
-import 'package:appstrument/app_state.dart';
 import 'package:appstrument/views/class_view.dart';
 import 'package:appstrument/views/logcat_view.dart';
 import 'package:appstrument/views/process_view.dart';
@@ -10,11 +9,11 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(25.0),
+    return const Padding(
+      padding: EdgeInsets.all(25.0),
       child: Row(
         children: [
-          const Expanded(
+          Expanded(
             flex: 3,
             child: Card(
               child: Padding(
@@ -26,7 +25,7 @@ class HomePage extends StatelessWidget {
           Expanded(
             flex: 4,
             child: Column(
-              children: const [
+              children: [
                 Expanded(
                   flex: 5,
                   child: Card(
@@ -48,7 +47,7 @@ class HomePage extends StatelessWidget {
               ],
             ),
           ),
-          const Expanded(
+          Expanded(
             flex: 3,
             child: Card(
               child: Padding(

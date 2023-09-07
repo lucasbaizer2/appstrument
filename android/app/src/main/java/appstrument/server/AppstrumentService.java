@@ -4,11 +4,38 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
 import android.util.Log;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
+import java.util.Enumeration;
 
 import androidx.annotation.Nullable;
 
 public class AppstrumentService extends Service {
     private AppstrumentServer server;
+
+    static {
+        System.loadLibrary("appstrument");
+        AppstrumentNative.initialize();
+    }
+
+    public static String getLocalIpAddress() {
+        try {
+            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
+                NetworkInterface intf = en.nextElement();
+                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
+                    InetAddress inetAddress = enumIpAddr.nextElement();
+                    if (!inetAddress.isLoopbackAddress() && inetAddress instanceof Inet4Address) {
+                        return inetAddress.getHostAddress();
+                    }
+                }
+            }
+        } catch (SocketException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
 
     @Nullable
     @Override
@@ -27,6 +54,7 @@ public class AppstrumentService extends Service {
             }
         } else {
             LogUtil.print("Starting Appstrument service.");
+            LogUtil.print("IP Address: " + getLocalIpAddress());
         }
         this.server = new AppstrumentServer(32900);
         LogcatUtil.startReadThread();

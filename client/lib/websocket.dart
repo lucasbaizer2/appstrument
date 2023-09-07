@@ -13,7 +13,6 @@ class AppstrumentClient {
   final HashMap<int, Completer<AppstrumentResponse>> _completers = HashMap();
   final GZipDecoder _gZipDecoder = GZipDecoder();
   int _packetId = 0;
-  String _logcatBuffer = "";
   late WebSocketChannel _channel;
   late void Function(String)? logcatListener;
 

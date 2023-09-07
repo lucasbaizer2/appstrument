@@ -45,12 +45,14 @@ class _PatchPageState extends State<PatchPage> {
     if (result == null) {
       return;
     }
-    String apkPath = result.paths[0]
+
+    Directory tmpDir = await getTemporaryDirectory();
+    Directory patchDir = Directory('${tmpDir.path}/appstrument/patch');
+    String apkPath = result.paths[0]!;
 
     Shell shell = Shell();
-
     await shell.run(
-      'java -jar C:\\Users\\Lucas\\Code\\Projects\\appstrument\\client\\assets\\java\\apktool_2.6.0.jar decode ${} -o $outDir',
+      'java -jar "${tmpDir.path}/appstrument/apktool.jar" decode $apkPath -o "${patchDir.path}"',
       onProcess: (process) {
         process.outLines.asBroadcastStream().listen((event) {
           setState(() => _status = event.trim());

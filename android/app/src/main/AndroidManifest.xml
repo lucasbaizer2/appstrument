@@ -5,24 +5,18 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
     <application
-        android:name=".AppstrumentApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="Appstrument"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:exported="true"
-            android:name=".MainActivity"
-            android:label="Appstrument"
-            android:theme="@style/AppTheme.NoActionBar">
+        <receiver android:name=".AppstrumentReceiver" android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
-        </activity>
-        <service android:name="appstrument.server.AppstrumentService" />
+        </receiver>
+        <service android:name=".AppstrumentService" android:enabled="true" />
     </application>
 
 </manifest>

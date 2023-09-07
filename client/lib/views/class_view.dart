@@ -133,7 +133,7 @@ class _ClassViewItemState extends State<_ClassViewItem> /*with AutomaticKeepAliv
     height: 25.0,
   );
 
-  late String _tooltipText = widget.loadedClass.className;
+  late final String _tooltipText = widget.loadedClass.className;
   late Future<List<JavaField>> _staticFields;
   bool _showStaticFields = false;
   final GlobalKey _tooltipKey = GlobalKey();
