@@ -3,19 +3,24 @@ import 'package:flutter/material.dart';
 
 Widget getJavaValueWidget(JavaValue baseValue, TextStyle? defaultStyle) {
   if (baseValue.valueType == JavaValue_JavaValueType.NULL_OBJECT) {
-    return Text('null', style: const TextStyle(color: Colors.brown).merge(defaultStyle));
+    return Text('null',
+        style: const TextStyle(color: Colors.brown).merge(defaultStyle));
   }
   if (baseValue.hasDecimal()) {
-    return Text(baseValue.decimal.toString(), style: const TextStyle(color: Colors.green).merge(defaultStyle));
+    return Text(baseValue.decimal.toString(),
+        style: const TextStyle(color: Colors.green).merge(defaultStyle));
   }
   if (baseValue.hasBoolean()) {
-    return Text(baseValue.boolean.toString(), style: const TextStyle(color: Colors.blue).merge(defaultStyle));
+    return Text(baseValue.boolean.toString(),
+        style: const TextStyle(color: Colors.blue).merge(defaultStyle));
   }
   if (baseValue.hasInteger()) {
-    return Text(baseValue.integer.toString(), style: const TextStyle(color: Colors.green).merge(defaultStyle));
+    return Text(baseValue.integer.toString(),
+        style: const TextStyle(color: Colors.green).merge(defaultStyle));
   }
   if (baseValue.hasString()) {
-    return Text('"' + baseValue.string + '"', style: const TextStyle(color: Colors.brown).merge(defaultStyle));
+    return Text('"' + baseValue.string + '"',
+        style: const TextStyle(color: Colors.brown).merge(defaultStyle));
   }
   if (baseValue.hasObjectType()) {
     return Text(

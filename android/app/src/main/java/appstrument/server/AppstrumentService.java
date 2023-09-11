@@ -10,8 +10,6 @@ import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
 
-import androidx.annotation.Nullable;
-
 public class AppstrumentService extends Service {
     private AppstrumentServer server;
 
@@ -37,7 +35,6 @@ public class AppstrumentService extends Service {
         return null;
     }
 
-    @Nullable
     @Override
     public IBinder onBind(Intent intent) {
         return null;
